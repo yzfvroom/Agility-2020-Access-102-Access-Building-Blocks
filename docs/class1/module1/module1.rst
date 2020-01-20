@@ -67,8 +67,6 @@ IdP Connector
 
 #. Click **OK** on the dialog box
 
-   |image4|
-
    .. NOTE:: The idp.partner.com-app_metadata.xml was created previously.
       Oftentimes, IdP providers will have a metadata file representing their IdP
       service.  This can be imported to save object creation time as it has been
@@ -96,9 +94,9 @@ IdP Connector
    Local SP Services** menu you should now see the following (as shown):
 
    +----------------------+---------------------+
-   | Name:                | ``app.f5demo.com``  |
+   | Name:                | ``app.acme.com``  |
    +----------------------+---------------------+
-   | SAML IdP Connectors: | ``idp.partner.com`` |
+   | SAML IdP Connectors: | ``app.acme.com`` |
    +----------------------+---------------------+
 
    |image7|
@@ -116,7 +114,7 @@ TASK 2 ‑ Configure the SAML SP Access Policy
 #. In the **New Profile** window, key in the following:
 
    +----------------+---------------------------+
-   | Name:          | ``app.f5demo.com‑policy`` |
+   | Name:          | ``app.acme.com`` |
    +----------------+---------------------------+
    | Profile Type:  | ``All`` (from drop down)  |
    +----------------+---------------------------+
@@ -128,50 +126,43 @@ TASK 2 ‑ Configure the SAML SP Access Policy
 #. Select *English* from the **Factory Built‑in Languages** on the right,
    and click the **Double Arrow (<<)**, then click the **Finished** button.
 
-   |image9|
-
+  
    |br|
 
-   |image10|
-
+  
 #. From the **Access ‑> Profiles/Policies ‑> Access Profiles
    (Per‑Session Policies)** screen, click the **Edit** link on the previously
-   created ``app.f5demo.com‑policy`` line
+   created ``app.acme.com`` line
 
-   |image11|
 
-#. In the Visual Policy Editor window for ``/Common/app.f5demo.com‑policy``,
+
+#. In the Visual Policy Editor window for ``/Common/app.acme.com‑policy``,
    click the **Plus (+) Sign** between **Start** and **Deny**
 
-   |image12|
-
+  
 #. In the pop‑up dialog box, select the **Authentication** tab and then click
    the **Radio Button** next to **SAML Auth**
 
 #. Once selected, click the **Add Item** button
 
-   |image13|
-
+  
 #. In the **SAML Auth** configuration window, select ``/Common/app.f5demo.com``
    from the **AAA Server** drop down menu
 
 #. Click the **Save** button at the bottom of the window
 
-   |image14|
-
-#. In the **Visual Policy Editor** window for ``/Common/app.f5demo.com‑policy``,
+ 
+#. In the **Visual Policy Editor** window for ``/Common/app.acme.com‑policy``,
    click the **Plus (+) Sign** on the **Successful** branch following
    **SAML Auth**
 
-   |image15|
-
+   
 #. In the pop-up dialog box, select the **Assignment** tab, and then click
    the **Radio Button** next to **Variable Assign**
 
 #. Once selected, click the **Add Item** buton
 
-   |image16|
-
+ 
 #. In the **Variable Assign** configuration window, click the
    **Add New Entry** button
 
@@ -202,23 +193,19 @@ TASK 2 ‑ Configure the SAML SP Access Policy
 #. Click the **Save** button at the bottom of the **Variable Assign**
    dialog window
 
-   |image17|
-
+  
 #. In the **Visual Policy Editor** select the **Deny** ending along the
    **fallback** branch following the **Variable Assign**
 
-   |image18|
-
+   
 #. From the **Select Ending** dialog box, select the **Allow** button and
    then click **Save**
 
-   |image19|
-
+ 
 #. In the **Visual Policy Editor** click **Apply Access Policy** (top left)
    and close the **Visual Policy Editor**
 
-   |image20|
-
+ 
 TASK 3 ‑ Create the SP Virtual Server & Apply the SP Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -226,16 +213,15 @@ TASK 3 ‑ Create the SP Virtual Server & Apply the SP Access Policy
 
 #. Click the **Create** button (far right)
 
-   |image21|
-
+  
 #. In the **New Virtual Server** window, key in the following as shown:
 
    +---------------------------+----------------------------+
    | General Properties                                     |
    +===========================+============================+
-   | Name:                     | ``app.f5demo.com``         |
+   | Name:                     | ``sp_vs``         |
    +---------------------------+----------------------------+
-   | Destination Address/Mask: | ``10.1.10.100``            |
+   | Destination Address/Mask: | ``10.1.10.102``            |
    +---------------------------+----------------------------+
    | Service Port:             | ``443``                    |
    +---------------------------+----------------------------+
@@ -245,13 +231,13 @@ TASK 3 ‑ Create the SP Virtual Server & Apply the SP Access Policy
    +===========================+==============================+
    | HTTP Profile:             | ``http`` (drop down)         |
    +---------------------------+------------------------------+
-   | SSL Profile (Client)      | ``app.f5demo.com‑clientssl`` |
+   | SSL Profile (Client)      | ``clientssl`` |
    +---------------------------+------------------------------+
 
    +-----------------+---------------------------+
    | Access Policy                               |
    +=================+===========================+
-   | Access Profile: | ``app.f5demo.com‑policy`` |
+   | Access Profile: | ``app.acme.com`` |
    +-----------------+---------------------------+
 
    +---------+-----------------------+
@@ -262,15 +248,6 @@ TASK 3 ‑ Create the SP Virtual Server & Apply the SP Access Policy
 
 #. Scroll to the bottom of the configuration window and click **Finished**
 
-   |image22|
-
-   |br|
-
-   |image23|
-
-   |br|
-
-   |image24|
 
    .. NOTE:: The iRule is being added in order to simulate an application
       server to validate successful access.
@@ -281,8 +258,7 @@ TASK 4 ‑ Test the SAML SP
 #. Using your browser from the jump host, navigate to the SAML SP you just
    configured at ``https://app.f5demo.com`` (or click the provided bookmark)
 
-   |image25|
-
+   
 #. Did you successfuly redirect to the IdP?
 
 #. Log in to the IdP. Were you successfully authenticated?
@@ -301,29 +277,3 @@ TASK 4 ‑ Test the SAML SP
 .. |br| raw:: html
 
    <br />
-
-.. |image1| image:: /_static/class1/image3.png
-.. |image2| image:: /_static/class1/image4.png
-.. |image3| image:: /_static/class1/image5.png
-.. |image4| image:: /_static/class1/image6.png
-.. |image5| image:: /_static/class1/image7.png
-.. |image6| image:: /_static/class1/image8.png
-.. |image7| image:: /_static/class1/image9.png
-.. |image8| image:: /_static/class1/image10.png
-.. |image9| image:: /_static/class1/image11.png
-.. |image10| image:: /_static/class1/image12.png
-.. |image11| image:: /_static/class1/image13.png
-.. |image12| image:: /_static/class1/image14.png
-.. |image13| image:: /_static/class1/image15.png
-.. |image14| image:: /_static/class1/image16.png
-.. |image15| image:: /_static/class1/image17.png
-.. |image16| image:: /_static/class1/image18.png
-.. |image17| image:: /_static/class1/image19.png
-.. |image18| image:: /_static/class1/image20.png
-.. |image19| image:: /_static/class1/image21.png
-.. |image20| image:: /_static/class1/image22.png
-.. |image21| image:: /_static/class1/image23.png
-.. |image22| image:: /_static/class1/image24.png
-.. |image23| image:: /_static/class1/image25.png
-.. |image24| image:: /_static/class1/image26.png
-.. |image25| image:: /_static/class1/image27.png
