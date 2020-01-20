@@ -1,15 +1,11 @@
-Lab 4: [Optional] SaaS Federation iApp Lab
+Lab 4: [Optional] Troubleshooting APM policies
 ==========================================
 
 .. toctree::
    :maxdepth: 1
    :glob:
 
-The purpose of this lab is to familiarize the Student with the new SaaS
-Federation iApp. Students will use the iApp to create a federation
-relationship with a commonly used SaaS provider. This lab will leverage
-the work performed previously in Lab 3. Archive files are available for
-the completed Lab 3.
+The purpose of this lab is to familiarize the Student with basic troubleshooting of APM policies.
 
 Objective:
 
