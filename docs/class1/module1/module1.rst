@@ -38,16 +38,14 @@ SP Service
    in the left navigation pane and key in the following as shown:
 
    +------------+----------------------------+
-   | Name:      | ``app.f5demo.com``         |
+   | Name:      | ``app.acme.com``         |
    +------------+----------------------------+
-   | Entity ID: | ``https://app.f5demo.com`` |
+   | Entity ID: | ``https://app.acme.com`` |
    +------------+----------------------------+
 
 #. Click **OK** on the dialogue box
 
-   |image2|
-
-   .. NOTE:: The yellow box on Host will disappear when the Entity ID is entered.
+    .. NOTE:: The yellow box on Host will disappear when the Entity ID is entered.
 
 IdP Connector
 -------------
@@ -61,9 +59,7 @@ IdP Connector
 
 #. Select **From Metadata** from the drop down menu
 
-   |image3|
-
-#. In the **Create New SAML IdP Connector** dialogue box, click **Browse**
+ #. In the **Create New SAML IdP Connector** dialogue box, click **Browse**
    and select the **idp.partner.com‑app_metadata.xml** file from the Desktop
    of your jump host.
 
