@@ -1,4 +1,4 @@
-Lab 1: SAML Service Provider (SP) Lab
+Lab 1: Client-side Authentication lab
 =====================================
 
 .. toctree::
