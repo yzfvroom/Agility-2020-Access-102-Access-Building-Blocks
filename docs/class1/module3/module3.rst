@@ -1,4 +1,4 @@
-Lab 3: Kerberos to SAML Lab
+Lab 2: SSO Lab
 ===========================
 
 .. toctree::
