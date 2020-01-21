@@ -6,9 +6,19 @@ Lab 1: Client-side Authentication lab
    :glob:
 
 The purpose of this lab is to configure and test a SAML Service
-Provider. Students will configure the various aspects of a SAML Service
-Provider, import and bind to a SAML Identity Provider and test
-SP‑Initiated SAML Federation.
+Provider. It is assumed students have a basic of SAML (Security Assertion
+Markup Language) which defines an XML framework for creating, requesting,
+and exchanging authentication and authorization data among entites
+known as Identity Providers (IdPs) and Service Providers (SPs).  The 
+Lab environment will have a pre-configured IdP.   Students will configure
+the various aspects of a SAML Service Provider, import and bind to a SAML
+Identity Provider and test SPInitiated SAML Federation.
+
+When you use APM as a SAML service provider, APM consumes SAML assertions 
+(claims) and validates their trustworthiness.   After successfully verifying
+the assertion, APM creates session variables from the assertion contents.  An
+Access Policy can use session variables to finely control access to resources
+and to determine which ACLs to assign.  
 
 Objective:
 
@@ -17,31 +27,36 @@ Objective:
 
 -  Gain an understanding of the access flow for SP-Initiated SAML
 
+-  Gain a basic understanding of Client-Side Authentication
+
 Lab Requirements:
 
 -  All Lab requirements will be noted inƒ the tasks that follow
 
-Estimated completion time: 25 minutes
+Estimated completion time: 20 minutes
 
 TASK 1 ‑ Configure the SAML Service Provider (SP)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**Note - within an SP-Initiated flow the SP sends an authn req to the IdP**
+
 SP Service
 ----------
-
+#. Begin by logging into the big-ip1.f5lab.local via the GUI (TMUI)
 #. Begin by selecting: **Access -> Federation -> SAML Service Provider -> Local SP Services**
 #. Click the **Create** button (far right)
 
-   |image1|
 
 #. In the **Create New SAML SP Service** dialog box click **General Settings**
    in the left navigation pane and key in the following as shown:
 
    +------------+----------------------------+
-   | Name:      | ``app.acme.com``         |
+   | Name:      | ``server2.acme.com``         |
    +------------+----------------------------+
-   | Entity ID: | ``https://app.acme.com`` |
+   | Entity ID: | ``https://server2.acme.com`` |
    +------------+----------------------------+
+   
+**Note - Service Provider hostnames much be resolvable by the BIG-IP and User-Agent**
 
 #. Click **OK** on the dialogue box
 
@@ -50,7 +65,7 @@ SP Service
 IdP Connector
 -------------
 
-#. Click on **Access ‑> Federation ‑> SAML Service Provider ‑> External IdP
+#. Click on **Access > Federation > SAML Service Provider > External IdP
    Connectors** *or* click on the **SAML Service Provider** tab in the
    horizontal navigation menu and select **External IdP Connectors**
 
