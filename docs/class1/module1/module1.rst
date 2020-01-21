@@ -78,9 +78,7 @@ IdP Connector
 #. Click the **checkbox** next to the previously created *app.f5demo.com* and
    click **Bind/Unbind IdP Connectors** at the bottom of the GUI
 
-   |image5|
-
-#. In the **Edit SAML IdP's that use this SP** dialogue box, click the
+  #. In the **Edit SAML IdP's that use this SP** dialogue box, click the
     **Add New Row** button
 #. In the added row, click the **Down Arrow** under **SAML IdP Connectors** and
    select the */Common/idp.partner/com* SAML IdP Connector previously created
@@ -88,8 +86,7 @@ IdP Connector
 #. Click the **Update** button and the **OK** button at the bottom of the
    dialog box
 
-   |image6|
-
+  
 #. Under the **Access ‑> Federation ‑> SAML Service Provider ‑>
    Local SP Services** menu you should now see the following (as shown):
 
@@ -109,8 +106,7 @@ TASK 2 ‑ Configure the SAML SP Access Policy
 
 #. Click the **Create** button (far right)
 
-   |image8|
-
+   
 #. In the **New Profile** window, key in the following:
 
    +----------------+---------------------------+
