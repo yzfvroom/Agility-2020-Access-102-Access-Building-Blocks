@@ -6,13 +6,14 @@ Lab 1: Client-side Authentication lab
    :glob:
 
 The purpose of this lab is to configure and test a SAML Service
-Provider. It is assumed students have a basic of SAML (Security Assertion
-Markup Language) which defines an XML framework for creating, requesting,
-and exchanging authentication and authorization data among entites
-known as Identity Providers (IdPs) and Service Providers (SPs).  The 
-Lab environment will have a pre-configured IdP.   Students will configure
-the various aspects of a SAML Service Provider, import and bind to a SAML
-Identity Provider and test SPInitiated SAML Federation.
+Provider. It is assumed students have a basic understanding of SAML
+(Security Assertion Markup Language) which defines an XML framework
+for creating, requesting, and exchanging authentication and authorization
+data among entites known as Identity Providers (IdPs) and Service Providers (SPs).
+The Lab environment will have a pre-configured IdP along with a Virtual Server
+and Access Policy.  Student tasks consist of configuring various aspects of a 
+SAML Service Provider, importing and binding to a SAML
+Identity Provider and testing SPInitiated SAML Federation.
 
 When you use APM as a SAML service provider, APM consumes SAML assertions 
 (claims) and validates their trustworthiness.   After successfully verifying
