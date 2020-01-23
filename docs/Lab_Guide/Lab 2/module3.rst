@@ -5,13 +5,24 @@ Lab 2: SSO Lab
    :maxdepth: 1
    :glob:
 
-The purpose of this lab is to deploy and test a Kerberos to SAML
-configuration. Students will modify a previous built Access Policy and
-create a seamless access experience from Kerberos to SAML for connecting
-users. This lab will leverage the work performed previously in Lab 2.
-Archive files are available for the completed Lab 2.
+The purpose of this lab is to demonstrate Single Sign-On capabilities
+of APM.    The SSO Credential Mapping action enables users to forward
+stored user names and passwords to applications and servers automatically,
+without having to input credentials repeatedly.   This allows single 
+sign-on (SSO) functionality for secure user access.  As different applications
+and resources support different authentication mechanisms, the SSO system
+may be required to store and translate credentials that differ from the 
+user name and password a user inputs on the logon page.  The SSO credential
+mapping action allows for credentials to be retrieved from the logon
+page, or in another way for both the user name and the password.
+
+This lab will demonstrate one SSO method, although a number of different SSO
+methods exist.  This lab will demonstrate the Kerberos to SAML method.
 
 Objective:
+
+-  Gain an understanding SSO Token User Name Caching and SSO Token Password
+   Caching.
 
 -  Gain an understanding of the Kerberos to SAML relationship its
    component parts.
@@ -23,50 +34,85 @@ Lab Requirements:
 
 -  All Lab requirements will be noted in the tasks that follow
 
-Estimated completion time: 25 minutes
+Estimated completion time: 15 minutes
 
-TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
+TASK 1 – Create SAML Resource, Webtop, and SAML IdP
+Access Policy
+
+______________________________________________________________
+
+SAML Resource
+
+#  Being by selecting Access > Federation > SAML Resources
+
+#  Click the Create button (far right)
+
+#  In the New SAML Resource window, enter the following values:
+
+	Name			 	partner-app
+	
+	SSO Configuration	prebuilt-idp.acme.com
+	
+	Caption				partner-app
+	
+Click Finished at the bottom of the configuration window
+
+Webtop
+
+#	Select Access > Webtops > Webtop List
+
+#	Click Create button (far right)
+
+#	In the resulting window, enter the following values
+
+	Name	full_webtop
+	Type	Full (drop down)
+
+Click finished at the bottom of the GUI
+
+
+TASK 2 – Modify the SAML Identity Provider (IdP) Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Using the existing Access Policy from Lab 2, navigate to **Access ‑>
+#. Using the existing Access Policy (pre-built-idp.acme.com) and navigate to **Access ‑>
    Profiles/Policies ‑> Access Profiles (Per-Session Policies)**, and click
-   the **Edit** link next to the previously created *idp.f5demo.com-policy*
+   the **Edit** link next to the previously created *pre-built-idp.acme.com*
 
-   |image70|
+   
 
 #. Delete the **Logon Page** object by clicking on the **X** as shown
 
-   |image71|
+   
 
 #. In the resulting **Item Deletion Confirmation** dialog, ensure that the
    previous node is connect to the **fallback** branch, and click the
    **Delete** button
 
-   |image72|
+   
 
-#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+#. In the **Visual Policy Editor** window for ``/Common/pre-built-idp.acme.com access policy``,
    click the **Plus (+) Sign** between **Start** and **AD Auth**
 
-   |image73|
+   
 
 #. In the pop-up dialog box, select the **Logon** tab and then select the
    **Radio** next to **HTTP 401 Response**, and click the **Add Item** button
 
-   |image74|
+   
 
 #. In the **HTTP 401 Response** dialog box, enter the following information:
 
    +-------------------+---------------------------------+
-   | Basic Auth Realm: | ``f5demo.com``                  |
+   | Basic Auth Realm: | ``f5lab.local``                  |
    +-------------------+---------------------------------+
    | HTTP Auth Level:  | ``basic+negotiate`` (drop down) |
    +-------------------+---------------------------------+
 
 #. Click the **Save** button at the bottom of the dialog box
 
-   |image75|
+   
 
-#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+#. In the **Visual Policy Editor** window for ``/Common/pre-built-idp.acme.com policy``,
    click the **Plus (+) Sign** on the **Negotiate** branch between
    **HTTP 401 Response** and **Deny**
 
@@ -74,7 +120,7 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
    select the **Radio** next to **Kerberos Auth**, and click the
    **Add Item** button
 
-   |image76|
+   
 
 #. In the **Kerberos Auth** dialog box, enter the following information:
 
@@ -86,17 +132,16 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
 
 #. Click the **Save** button at the bottom of the dialog box
 
-   |image77|
-
+   
    .. NOTE:: The *apm-krb-aaa* object was pre-created for you in this lab.
       More details on the configuration of Kerberos AAA are included in
       the Learn More section at the end of this guide.
 
 #. In the **Visual Policy Editor** window for
-   ``/Common/idp.f5demo.com‑policy``, click the **Plus (+) Sign** on the
+   ``/Common/pre-built-idp.acme.com policy``, click the **Plus (+) Sign** on the
    **Successful** branch between **Kerberos Auth** and **Deny**
 
-   |image78|
+   
 
 #. In the pop-up dialog box, select the **Authentication** tab and then
    select the **Radio** next to **AD Query**, and click the **Add Item** button
@@ -104,7 +149,7 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
    |image79|
 
 #. In the resulting **AD Query(1)** pop-up window, select
-   ``/Commmon/f5demo_ad`` from the **Server** drop down menu
+   ``/Commmon/prebuilt-ad-servers`` from the **Server** drop down menu
 
 #. In the **SearchFilter** field, enter the following value:
    ``userPrincipalName=%{session.logon.last.username}``
@@ -117,7 +162,7 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
 
 #. Click the **Change** link next to the **Expression**
 
-   |image81|
+   
 
 #. In the resulting pop-up window, delete the existing expression by clicking
    the **X** as shown
@@ -148,7 +193,7 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
 
    |image86|
 
-#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+#. In the **Visual Policy Editor** window for ``/Common/pre-built-idp.acme.com policy``,
    click the **Plus (+) Sign** on the **Successful** branch between
    **AD Query(1)** and **Deny**
 
@@ -205,10 +250,10 @@ TASK 2 - Test the Kerberos to SAML Configuration
    Explorer has been configured and will be used.
 
 #. Using Internet Explorer from the jump host, navigate to the SAML IdP you
-   previously configured at *https://idp.f5demo.com* (or click the
+   previously configured at *pre-built-idp.acme.com* (or click the
    provided bookmark)
 
-   |image94|
+   
 
 #. Were you prompted for credentials? Were you successfully authenticated?
    Did you see the webtop with the SP application?
