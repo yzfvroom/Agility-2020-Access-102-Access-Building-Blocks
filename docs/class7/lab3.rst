@@ -168,7 +168,7 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
    |image076|
 
 #. In the **Visual Policy Editor** window for
-   ``/Common/idp.acme.com‑policy``, click the **Plus (+) Sign** on the
+   ``/Common/idp.acme.com‑kerberos``, click the **Plus (+) Sign** on the
    **Successful** branch between **Kerberos Auth** and **Deny**
 
    |image077|
@@ -221,7 +221,7 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
 
 #. Click the **Save** button to complete the **AD Query**
 
-#. In the **Visual Policy Editor** window for ``/Common/idp.acme.com‑policy``,
+#. In the **Visual Policy Editor** window for ``/Common/idp.acme.com‑kerberos``,
    click the **Plus (+) Sign** on the **Successful** branch between
    **AD Query(1)** and **Deny**
 
